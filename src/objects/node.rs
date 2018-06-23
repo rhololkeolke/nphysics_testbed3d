@@ -1,14 +1,14 @@
 use kiss3d::scene::SceneNode;
 use na::{Isometry3, Point3};
-use nphysics3d::world::World;
 use nphysics3d::object::ColliderHandle;
-use objects::plane::Plane;
+use nphysics3d::world::World;
 use objects::ball::Ball;
 use objects::box_node::Box;
-use objects::cylinder::Cylinder;
 use objects::cone::Cone;
-use objects::mesh::Mesh;
 use objects::convex::Convex;
+use objects::cylinder::Cylinder;
+use objects::mesh::Mesh;
+use objects::plane::Plane;
 
 pub enum Node {
     Plane(Plane),
@@ -116,7 +116,8 @@ pub fn update_scene_node(
     let co = world.collider(coll).unwrap();
     let active = world.body(co.data().body()).is_active();
 
-    if active {
+    if true {
+        // active {
         node.set_local_transformation(co.position() * delta);
         node.set_color(color.x, color.y, color.z);
     } else {
