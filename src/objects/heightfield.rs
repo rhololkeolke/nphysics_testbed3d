@@ -27,11 +27,11 @@ impl HeightField {
         let mesh = heightfield.to_trimesh(());
 
         let mut res = HeightField {
-            color: color,
+            color,
             base_color: color,
-            delta: delta,
+            delta,
             gfx: window.add_trimesh(mesh, Vector3::repeat(1.0)),
-            collider: collider,
+            collider,
         };
 
         if world

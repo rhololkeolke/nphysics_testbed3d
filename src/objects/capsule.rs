@@ -24,11 +24,11 @@ impl Capsule {
         window: &mut window::Window,
     ) -> Capsule {
         let mut res = Capsule {
-            color: color,
+            color,
             base_color: color,
-            delta: delta,
+            delta,
             gfx: window.add_capsule(r, h),
-            collider: collider,
+            collider,
         };
 
         if world
