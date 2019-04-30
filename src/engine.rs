@@ -73,6 +73,8 @@ impl GraphicsManager {
         self.b2sn.clear();
         self.aabbs.clear();
         self.rays.clear();
+        self.b2color.clear();
+        self.c2color.clear();
     }
 
     pub fn remove_body_nodes(&mut self, window: &mut Window, body: BodyHandle) {
@@ -175,7 +177,7 @@ impl GraphicsManager {
 
     pub fn add(&mut self, window: &mut Window, id: ColliderHandle, world: &World<f32>) {
         let collider = world.collider(id).unwrap();
-
+        
         let color = if let Some(c) = self.c2color.get(&id).cloned() {
             c
         } else if let Some(c) = self.b2color.get(&collider.body()).cloned() {
