@@ -17,7 +17,8 @@ use crate::objects::node::Node;
 use crate::objects::heightfield::HeightField;
 use crate::objects::plane::Plane;
 use crate::objects::capsule::Capsule;
-use rand::{Rng, SeedableRng, XorShiftRng};
+use rand::{Rng, SeedableRng};
+use rand_xorshift::XorShiftRng;
 use std::collections::HashMap;
 
 pub struct GraphicsManager {
