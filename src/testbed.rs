@@ -48,9 +48,12 @@ pub struct Testbed {
     grabbed_object: Option<BodyPartHandle>,
     grabbed_object_constraint: Option<ConstraintHandle>,
     grabbed_object_plane: (Point3<f32>, Vector3<f32>),
+
+    reload_callback: Option<ReloadCallback>,
 }
 
 type Callbacks = Vec<Box<Fn(&mut WorldOwner, &mut GraphicsManager, f32)>>;
+type ReloadCallback = Box<Fn(&mut WorldOwner)>;
 
 impl Testbed {
     pub fn new_empty() -> Testbed {
@@ -78,6 +81,7 @@ impl Testbed {
             grabbed_object: None,
             grabbed_object_constraint: None,
             grabbed_object_plane: (Point3::origin(), na::zero()),
+            reload_callback: None,
         }
     }
 
@@ -174,6 +178,13 @@ impl Testbed {
         callback: F,
     ) {
         self.callbacks.push(Box::new(callback));
+    }
+
+    pub fn add_reload_callback<F>(&mut self, callback: F)
+    where
+        F: Fn(&mut WorldOwner) + 'static
+    {
+        self.reload_callback = Some(Box::new(callback));
     }
 
     pub fn run(mut self) {
@@ -415,6 +426,26 @@ impl State for Testbed {
                 //             //     graphics.disable_aabb_draw(window);
                 //             // }
                 //         },
+                WindowEvent::Key(Key::R, Action::Release, _) => {
+                    // TODO(dschwab): add some logging
+                    if let Some(reload_callback) = &self.reload_callback {
+                        reload_callback(&mut *self.world);
+
+                        // TODO(dschwab): Does anything in testbed
+                        // besides time need to be reset?
+                        self.time = 0.0;
+
+                        let mut world = self.world.get_mut();
+                        world.enable_performance_counters();
+
+                        self.graphics.clear(window);
+
+                        for co in world.colliders() {
+                            self.graphics
+                                .add(window, co.handle(), &world);
+                        }
+                    }
+                }
                 WindowEvent::Key(Key::Space, Action::Release, _) => {
                     let physics_world = &mut self.world.get_mut();
 
