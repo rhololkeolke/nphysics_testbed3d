@@ -208,6 +208,7 @@ impl GraphicsManager {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn add_shape(
         &mut self,
         window: &mut Window,
@@ -261,6 +262,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn add_mesh(
         &mut self,
         window: &mut Window,
@@ -290,6 +292,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]    
     fn add_heightfield(
         &mut self,
         window: &mut Window,
@@ -310,6 +313,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]    
     fn add_capsule(
         &mut self,
         window: &mut Window,
@@ -332,6 +336,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]    
     fn add_ball(
         &mut self,
         window: &mut Window,
@@ -353,6 +358,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]    
     fn add_box(
         &mut self,
         window: &mut Window,
@@ -373,6 +379,7 @@ impl GraphicsManager {
         )))
     }
 
+    #[allow(clippy::too_many_arguments)]    
     fn add_convex(
         &mut self,
         window: &mut Window,

@@ -14,6 +14,7 @@ pub struct Box {
 }
 
 impl Box {
+    #[allow(clippy::too_many_arguments)]    
     pub fn new(
         collider: ColliderHandle,
         world: &World<f32>,
